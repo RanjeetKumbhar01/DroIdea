@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to instagram. Explore new content">
+    <meta name="author" content="Tavonga">
+    <link rel="stylesheet" href="style.css">
+    <title>DroIdea</title>
+    <style>
+        /*Global Styles (Available on both web and app)*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        #logo {
+            cursor: pointer;
+            width: 7vw;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+        }
+
+        /*Web only styles*/
+        @media (min-width: 769px) {
+
+            /*display none ensures that all html elements with an id of app do not show up on larger devices*/
+            #app {
+                display: none;
+            }
+
+            .web-container {
+                width: 72%;
+                margin: auto;
+            }
+
+            header {
+                justify-content: space-between;
+                padding: 5px 0 0 0;
+            }
+
+            #search-bar {
+                width: 16vw;
+                height: 30px;
+                padding: 5px;
+                border: 1px solid rgb(216, 216, 216);
+                border-radius: 4px;
+                background-color: rgba(235, 235, 235, 0.664);
+                color: rgba(0, 0, 0, 0.562);
+                -webkit-appearance: none;
+                outline: none;
+                text-align: center;
+            }
+
+            #search-bar::placeholder {
+                font-size: 1em;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.452);
+            }
+
+            /*Buttons*/
+            .web-buttons {
+                padding: 8px 0;
+            }
+
+            .web-button {
+                cursor: pointer;
+                font-weight: 700;
+                width: 60px;
+                height: 30px;
+                -webkit-appearance: none;
+                outline: none;
+                border: none;
+                border-radius: 4px;
+            }
+
+            #login-button {
+                background-color: rgb(1, 151, 238);
+                color: #f8f8f8;
+                font-size: 13px;
+            }
+
+            #signup-button {
+                background-color: #ffffff;
+                color: rgb(1, 151, 238);
+            }
+
+            .section-break {
+                border-top: 1px solid rgb(216, 216, 216);
+            }
+
+            /*Main Section*/
+            .background {
+                background-color: rgba(235, 235, 235, 0.315);
+            }
+
+            .feed-heading {
+                padding: 20px 0 20px 0;
+                font-size: 0.9em;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.562);
+            }
+
+            /*Web only shows images and they are in three columns as styled below*/
+            .pics-only {
+                display: grid;
+                grid-gap: 20px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .image {
+                width: 22vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+
+        /*App Only Styles*/
+        @media (min-width: 290px) and (max-width: 768px) {
+
+            /*Web only styles are disabled*/
+            #web {
+                display: none;
+            }
+
+            header {
+                flex-direction: column;
+                justify-content: center;
+                background-color: white;
+            }
+
+            /*Styling for top search area*/
+            .header-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5em 0 0.2em 0;
+                width: 98vw;
+            }
+
+            .header-left {
+                display: flex;
+                align-items: center;
+                background-color: rgba(235, 235, 235, 0.747);
+                border: 1px solid rgba(0, 0, 0, 0.418);
+                height: 4vh;
+                border-radius: 10px;
+                padding: 5px;
+                margin-left: 3px;
+            }
+
+            .header-right {
+                padding: 6px;
+            }
+
+            .header-right .fa-home {
+                font-size: 20px;
+            }
+
+            #search-bar {
+                outline: none;
+                border: none;
+                background-color: rgba(235, 235, 235, 0.747);
+                border-radius: 10px;
+                width: 80vw;
+                padding: 3px;
+            }
+
+            /*Styling below is for the sticky navigation*/
+            .header-bottom {
+                z-index: 2;
+                position: sticky;
+                top: 0px;
+                height: 38px;
+                width: 100%;
+                padding: 0.4em;
+                background-color: white;
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .nav-button {
+                width: 80px;
+                height: 25px;
+                padding: 5px;
+                background-color: rgba(235, 235, 235, 0.747);
+                outline: none;
+                border: none;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .fa-shopping-bag {
+                font-size: 10px;
+                margin-right: 4px;
+                margin-bottom: 2px;
+            }
+
+            /*Main Section*/
+            main {
+                position: relative;
+                padding-bottom: 2em;
+            }
+
+            .reels {
+                overflow: hidden;
+                height: 50vh;
+                margin: 3px;
+            }
+
+            .reels video {
+                height: 50vh;
+            }
+
+            .pics-only {
+                margin: 3px;
+                display: grid;
+                grid-gap: 3px;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .image {
+                width: 32vw;
+            }
+
+            .pv-container {
+                margin: 3px;
+                display: grid;
+                grid-gap: 3px;
+                grid-template-areas:
+                    'top-pv-image pv-video pv-video'
+                    'bottom-pv-image pv-video pv-video';
+            }
+
+            .pv-video {
+                grid-area: pv-video;
+            }
+
+            .video {
+                height: 30vh;
+                width: 64vw;
+            }
+
+            .top-pv-image {
+                grid-area: top-pv-image;
+                width: 32vw;
+            }
+
+            .bottom-pv-image {
+                grid-area: bottom-pv-image;
+                width: 32vw;
+            }
+
+            /*Footer*/
+            footer {
+
+                /*The code below is for a fixed footer*/
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: white;
+                padding: 10px;
+                /*Fixed footer*/
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .fa-home {
+                font-size: 22px;
+            }
+
+            .footer-search {
+                font-size: 20px;
+            }
+
+            .fa-plus-square {
+                font-size: 22px;
+            }
+
+            .fa-heart {
+                font-size: 22px;
+            }
+
+            .user {
+                width: 22px;
+                border-radius: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--Header section-->
+
+    <header class="web-container">
+        <div id="web" class="web-logo"  onclick="location.href='index.html'">
+            <h2 style="color:rgb(6, 194, 247)">DroIdea</h2>
+        </div>
+        <div id="web" class="web-search">
+            <input id="search-bar" type="text" placeholder="Search">
+        </div>
+
+        <!--Top row of app-->
+        <div id="app" class="header-top">
+            <div class="header-left">
+                <i class="fas fa-search"></i>
+                <input id="search-bar" type="text" placeholder="Search">
+            </div>
+            <div class="header-right">
+                <i class="fas fa-home scan"></i>
+            </div>
+        </div>
+
+        <!--Header buttons for web-->
+        <div id="web" class="web-buttons">
+            <button id="login-button" class="web-button">Log In</button>
+            <button id="signup-button" class="web-button">Sign Up</button>
+        </div>
+    </header>
+
+
+
+    <!--This section break is used for the border line-->
+
+    <section id="web" class="section-break"></section>
+
+    <!--Main section contains the images-->
+
+    <main class="background">
+
+        <!--Web container aligns image items to the center-->
+        <div class="web-container">
+            <h4 id="web" class="feed-heading">Top Posts</h4>
+
+            <!--Pics only is a grid of images and is available on both app and web-->
+            <div class="pics-only">
+                <input type="image"
+                    src="https://www.startupguys.net/wp-content/uploads/2019/12/random-idea-into-business.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2017/03/20/21/00/server-2160321__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2017/04/20/14/11/glowing-2245832__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2016/11/27/21/42/stock-1863880__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2014/02/13/07/28/security-265130__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2022/06/25/18/55/pixel-art-7284052__340.png"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2022/08/29/07/44/port-7418239__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2016/06/25/12/55/art-1478831__340.jpg"
+                    width="325" height="250" alt="">
+            </div>
+            <h4 id="web" class="feed-heading">Most Recent</h4>
+            <div class="pics-only">
+                <input type="image"
+                    src="https://media.istockphoto.com/photos/young-african-man-wearing-virtual-reality-goggles-with-hands-up-on-picture-id1153003888?b=1&k=20&m=1153003888&s=170667a&w=0&h=4CJUSpLHJk-Pur4J0fwhdDtCb6RC0oG-FWqZJqaYOrs="
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2015/03/08/09/30/head-663997__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2012/11/28/09/08/mars-67522__340.jpg" width="325"
+                    height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2016/11/27/21/42/stock-1863880__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2014/02/13/07/28/security-265130__340.jpg"
+                    width="325" height="250" alt="">
+                <input type="image" src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924__340.jpg"
+                    width="325" height="250" alt="">
+            </div>
+</body>
+
+</html>
